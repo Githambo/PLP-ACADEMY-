@@ -1,0 +1,15 @@
+class Car:
+	def __init__(self,brand,mileage):
+		self.brand=brand
+		self.mileage=int(mileage)
+		
+	def price(self,brand,mileage):
+		if self.mileage <0:
+			print("a brand new vehicle ,,cost Ksh 10,000,000")
+
+		elif self.mileage >10000:
+			 print("used car ,cost is 30% of original price")
+
+
+c=Car("testa","0")
+c.price("testa","0")
