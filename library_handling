@@ -1,0 +1,28 @@
+import requests
+import os
+
+def fetch_image():
+	## Prompr user to enter the url 
+	url=input("Enter url ").strip()
+
+	#Saves the image in Fetched images and create one if it does not exist
+	save_dir="Fetched_Images"
+	os.makedirs(save_dir,exist_ok=True)
+
+	resp = requests.get(url, stream=True, timeout=15)
+	resp.raise_for_status()
+
+	#checks if the file is an image
+	content_type = resp.headers.get("Content-Type", "")
+	if not content_type.startswith("image/"):
+		print(f"❌ The URL is not an image (Content-Type: {content_type}).")
+		return
+
+	# # Extract filename from URL
+	parsed = urlparse(url)
+	filename = os.path.basename(parsed.path)
+	filename = unquote(filename) if filename else "downloaded_image"
+
+
+if __name__ == "__main__":
+    fetch_image()
