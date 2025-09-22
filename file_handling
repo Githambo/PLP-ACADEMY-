@@ -1,0 +1,29 @@
+def file_line_numbering():
+    # Ask for filename
+    filename = input("Enter the filename to read: ")
+
+    try:
+        with open(filename, "r") as file:
+            lines = file.readlines()
+
+        # Add line numbers
+        modified_lines = [f"{i+1}: {line}" for i, line in enumerate(lines)]
+
+        # New filename
+        new_filename = filename.replace(".", "_numbered.") if "." in filename else f"{filename}_numbered.txt"
+
+        with open(new_filename, "w") as new_file:
+            new_file.writelines(modified_lines)
+
+        print(f"✅ File processed successfully! Numbered file saved as: {new_filename}")
+
+    except FileNotFoundError:
+        print("❌ Error: File not found. Please check the filename.")
+    except PermissionError:
+        print("❌ Error: Permission denied. Cannot read/write this file.")
+    except Exception as e:
+        print(f"⚠️ Unexpected error: {e}")
+
+
+# Run the function
+file_line_numbering()
